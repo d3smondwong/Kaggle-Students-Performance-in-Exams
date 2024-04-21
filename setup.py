@@ -20,6 +20,11 @@ def get_requirements(file_path:str)->List[str]:
 # This means the package is installed in such a way that changes to the source code immediately affect the installed package without needing a reinstall. 
 # This is useful for development on a Python package.
 
+# If you install your local project with -e option (pip install -e mypackage) and use it in your environment 
+# (e.g. within your other project like from mypackage import custom_function) then, 
+# when you make any change to your custom_function, you will able to use this updated version without re-installing it again (with pip install or python setup.py), 
+# which would happen in case of omitting -e flag 
+
 setup(
 name='Kaggle Predict students performance in exams',
 version='0.0.1',
