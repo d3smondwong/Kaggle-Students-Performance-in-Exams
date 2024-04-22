@@ -42,7 +42,6 @@ class DataTransformation:
             ]
            # It creates two pipelines:
            # num_pipeline: Handles numerical data using SimpleImputer for median imputation and StandardScaler for standardization.
-           # cat_pipeline: Handles categorical data using SimpleImputer for most frequent value imputation, OneHotEncoder for one-hot encoding, and StandardScaler for scaling (with_mean=False to avoid centering categorical features).
 
             num_pipeline= Pipeline(
                 steps=[
@@ -51,6 +50,8 @@ class DataTransformation:
 
                 ]
             )
+           # cat_pipeline: Handles categorical data using SimpleImputer for most frequent value imputation, 
+           # OneHotEncoder for one-hot encoding, and StandardScaler for scaling (with_mean=False to avoid centering categorical features).
 
             cat_pipeline=Pipeline(
 
@@ -65,21 +66,20 @@ class DataTransformation:
             logging.info(f"Categorical columns: {categorical_columns}")
             logging.info(f"Numerical columns: {numerical_columns}")
 
+            # Now, we will need to combine the categorical and numerical pipeline together
             preprocessor=ColumnTransformer(
                 [
                 ("num_pipeline",num_pipeline,numerical_columns),
                 ("cat_pipelines",cat_pipeline,categorical_columns)
-
                 ]
-
-
             )
 
             return preprocessor
         
         except Exception as e:
             raise CustomException(e,sys)
-        
+    
+    # This method performs the data transformation process on training and testing data.    
     def initiate_data_transformation(self,train_path,test_path):
 
         try:
@@ -90,11 +90,12 @@ class DataTransformation:
 
             logging.info("Obtaining preprocessing object")
 
-            preprocessing_obj=self.get_data_transformer_object()
+            preprocessing_obj=self.get_data_transformer_object() # It calls get_data_transformer_object to get the preprocessor object. defined above
 
             target_column_name="math_score"
             numerical_columns = ["writing_score", "reading_score"]
 
+            # Separates features and target from both training and testing data
             input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
             target_feature_train_df=train_df[target_column_name]
 
@@ -105,6 +106,7 @@ class DataTransformation:
                 f"Applying preprocessing object on training dataframe and testing dataframe."
             )
 
+            # transforms the training and testing features using the preprocessor
             input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
 
