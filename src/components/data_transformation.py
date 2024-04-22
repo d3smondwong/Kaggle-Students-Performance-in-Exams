@@ -15,20 +15,23 @@ import os
 
 from src.utils import save_object
 
+# A data class is a special type of class that is designed to store data. 
+# creates a variable preprocessor_obj_file_path set to the path where a preprocessor object will be saved (artifacts/proprocessor.pkl).
 @dataclass
 class DataTransformationConfig:
-    preprocessor_obj_file_path=os.path.join('artifacts',"proprocessor.pkl")
+    preprocessor_obj_file_path=os.path.join('artifacts',"preprocessor.pkl") # to set the path where we will load a pickle file
 
 class DataTransformation:
     def __init__(self):
-        self.data_transformation_config=DataTransformationConfig()
+        self.data_transformation_config=DataTransformationConfig() # __init__ method: Initializes the class and creates a data_transformation_config object to hold configuration.
 
     def get_data_transformer_object(self):
         '''
-        This function si responsible for data trnasformation
+        This function is responsible for data transformation
         
         '''
-        try:
+        try:          
+            
             numerical_columns = ["writing_score", "reading_score"]
             categorical_columns = [
                 "gender",
@@ -37,6 +40,9 @@ class DataTransformation:
                 "lunch",
                 "test_preparation_course",
             ]
+           # It creates two pipelines:
+           # num_pipeline: Handles numerical data using SimpleImputer for median imputation and StandardScaler for standardization.
+           # cat_pipeline: Handles categorical data using SimpleImputer for most frequent value imputation, OneHotEncoder for one-hot encoding, and StandardScaler for scaling (with_mean=False to avoid centering categorical features).
 
             num_pipeline= Pipeline(
                 steps=[

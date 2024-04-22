@@ -42,6 +42,16 @@ class DataIngestion:
             """
                        
             logging.info('Read the dataset as dataframe')
+            
+            # rename the columns
+            df = df.rename(columns={'race/ethnicity': 'race_ethnicity',
+                        'parental level of education': 'parental_level_of_education',
+                        'test preparation course': 'test_preparation_course',
+                        'math score': 'math_score',
+                        'reading score': 'reading_score',
+                        'writing score': 'writing_score'})
+            
+            logging.info('Rename the columns to be more suitable for analysis')
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True) # Creates the directory structure for the output files if it doesn't exist (using os.makedirs). = artifacts
 
@@ -69,13 +79,13 @@ class DataIngestion:
             # Close the database connection (ensure it's closed even if errors occur)
             conn.close()
         """
-"""
+
 # to initiate and test the data_ingestion.py: python src/components/data_ingestion.py   
 # create 'artifact' folder and the logs     
 if __name__=="__main__":
     obj=DataIngestion() #Creates an instance of DataIngestion.
     obj.initiate_data_ingestion() 
-"""
+
          
         
 """      
