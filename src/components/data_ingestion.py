@@ -1,3 +1,4 @@
+# data_ingestion.py objective is to load the dataset and split into tran - test split
 import os
 import sys
 from src.exception import CustomException
