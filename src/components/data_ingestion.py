@@ -69,12 +69,14 @@ class DataIngestion:
             # Close the database connection (ensure it's closed even if errors occur)
             conn.close()
         """
-
+"""
 # to initiate and test the data_ingestion.py: python src/components/data_ingestion.py   
 # create 'artifact' folder and the logs     
 if __name__=="__main__":
     obj=DataIngestion() #Creates an instance of DataIngestion.
-    obj.initiate_data_ingestion()          
+    obj.initiate_data_ingestion() 
+"""
+         
         
 """      
 if __name__=="__main__":
