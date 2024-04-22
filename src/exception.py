@@ -28,4 +28,12 @@ class CustomException(Exception):
     def __str__(self): #convert the exception object to a string (e.g., by printing it). It simply returns the self.error_message, which provides the detailed error information.
         return self.error_message
 
-#
+# To initiate and test exception.py: python src/exception.py
+"""
+if __name__ == "__main__":
+    try:
+        a=1/0
+    except Exception as e:
+        logging.info("Error iniation: Divide by zero")    
+        raise CustomException(e,sys)               
+"""
