@@ -27,3 +27,5 @@ class CustomException(Exception):
     
     def __str__(self): #convert the exception object to a string (e.g., by printing it). It simply returns the self.error_message, which provides the detailed error information.
         return self.error_message
+
+#

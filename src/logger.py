@@ -16,3 +16,9 @@ logging.basicConfig(
 
 
 )
+
+# To initiate and test logger.py: python src/logger.py
+"""
+    if __name__ == "__main__":
+    logging.info("Logging has started")    
+"""
