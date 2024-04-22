@@ -7,4 +7,5 @@ catboost
 xgboost
 Flask
 
--e .
+# build this only at the final stage. as you do not want too many versions
+# -e .
