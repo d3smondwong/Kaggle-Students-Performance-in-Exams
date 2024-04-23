@@ -92,8 +92,11 @@ if __name__=="__main__":
 # create 'artifact' folder and the logs
 # create pickle file     
 if __name__=="__main__":
-    obj=DataIngestion() #Creates an instance of DataIngestion.
-    obj.initiate_data_ingestion() 
+    obj=DataIngestion() # Creates an instance of DataIngestion.
+    train_data,test_data=obj.initiate_data_ingestion() # Calls initiate_data_ingestion to get training and testing data paths.
+
+    data_transformation=DataTransformation() # Creates an instance of DataTransformation 
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data) # Calls initiate_data_transformation on the data transformation object, passing the training and testing data paths
  
 """
 if __name__=="__main__":
