@@ -21,8 +21,8 @@ def save_object(file_path, obj):
 
     except Exception as e:
         raise CustomException(e, sys)
-"""
-def evaluate_models(X_train, y_train,X_test,y_test,models,param):
+
+def evaluate_models(X_train_em, y_train_em,X_test_em,y_test_em,models,param):
     try:
         report = {}
 
@@ -31,20 +31,20 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
             para=param[list(models.keys())[i]]
 
             gs = GridSearchCV(model,para,cv=3)
-            gs.fit(X_train,y_train)
+            gs.fit(X_train_em,y_train_em)
 
             model.set_params(**gs.best_params_)
-            model.fit(X_train,y_train)
+            model.fit(X_train_em,y_train_em)
 
             #model.fit(X_train, y_train)  # Train model
 
-            y_train_pred = model.predict(X_train)
+            y_train_pred_em = model.predict(X_train_em)
 
-            y_test_pred = model.predict(X_test)
+            y_test_pred_em = model.predict(X_test_em)
 
-            train_model_score = r2_score(y_train, y_train_pred)
+            train_model_score = r2_score(y_train_em, y_train_pred_em)
 
-            test_model_score = r2_score(y_test, y_test_pred)
+            test_model_score = r2_score(y_test_em, y_test_pred_em)
 
             report[list(models.keys())[i]] = test_model_score
 
@@ -60,4 +60,4 @@ def load_object(file_path):
 
     except Exception as e:
         raise CustomException(e, sys)
-"""    
+  
