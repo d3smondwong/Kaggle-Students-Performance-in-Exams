@@ -29,8 +29,8 @@ class ModelTrainer:
         #__init__ function initializes an instance of ModelTrainerConfig and stores it in the model_trainer_config attribute
         self.model_trainer_config=ModelTrainerConfig() 
 
-
-    def initiate_model_trainer(self,train_array,test_array):
+    # Can include preprocessor path if we will like to in the future. def initiate_model_trainer(self,train_array,test_array,preprocessing object): 
+    def initiate_model_trainer(self,train_array,test_array): 
         
         # initiate_model_trainer function is where the model training happens. It takes two arguments: train_array and test_array
         try:
