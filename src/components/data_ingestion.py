@@ -33,12 +33,15 @@ class DataIngestion:
         try:
             df=pd.read_csv('data\StudentsPerformance.csv') # Change this for mongoDB / SQL
             """
-             # Connect to the SQLite database
-            conn = sqlite3.connect('noshow.db')
+            # Path to database file
+            database_path = "data/noshow.db"
+
+            # Connect to the database
+            connection = sqlite3.connect(database_path)
 
             # Define the SQL query to read data from a table (replace 'your_table_name' with the actual table name)
-            query = "SELECT * FROM your_table_name"
-            df = pd.read_sql_query(query, conn)
+            query = "SELECT * FROM noshow"
+            df = pd.read_sql_query(query, connection)
             """
                        
             logging.info('Read the dataset as dataframe')
@@ -77,7 +80,7 @@ class DataIngestion:
         """
         finally:
             # Close the database connection (ensure it's closed even if errors occur)
-            conn.close()
+            connection.close()
         """
 """
 # to initiate and test the data_ingestion.py: python src/components/data_ingestion.py   
