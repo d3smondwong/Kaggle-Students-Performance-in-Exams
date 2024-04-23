@@ -79,7 +79,8 @@ class DataTransformation:
         except Exception as e:
             raise CustomException(e,sys)
     
-    # This method performs the data transformation process on training and testing data.    
+    # This method performs the data transformation process on training and testing data.
+    # Return single NumPy arrays (train_arr and test_arr) for training and testing, respectively. This is to prepare data for model fitting.     
     def initiate_data_transformation(self,train_path,test_path):
 
         try:
@@ -90,7 +91,7 @@ class DataTransformation:
 
             logging.info("Obtaining preprocessing object")
 
-            preprocessing_obj=self.get_data_transformer_object() # It calls get_data_transformer_object to get the preprocessor object. defined above
+            preprocessing_obj=self.get_data_transformer_object() # It calls get_data_transformer_object to get the preprocessor object. This will be used to transform the data. defined above
 
             target_column_name="math_score"
             numerical_columns = ["writing_score", "reading_score"]
@@ -110,13 +111,15 @@ class DataTransformation:
             input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
 
-            train_arr = np.c_[
-                input_feature_train_arr, np.array(target_feature_train_df)
-            ]
+            # np.c is to concatenate the arrays along columns. 
+            # np.array is to convert the target variables from potentially pandas DataFrames (target_feature_train_df and target_feature_test_df) into NumPy arrays.
+            train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
+            
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
             logging.info(f"Saved preprocessing object.")
 
+            # to save the data transformer object(preprocessing_obj) into the pickle (.pkl) file via file_path
             save_object(
 
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,
