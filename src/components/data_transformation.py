@@ -119,7 +119,7 @@ class DataTransformation:
 
             logging.info(f"Saved preprocessing object.")
 
-            # to save the data transformer object(preprocessing_obj) into the pickle (.pkl) file via file_path
+            # to save the data transformer object(preprocessing_obj) into the pickle (.pkl) file via file_path. This can be use on new data
             save_object(
 
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,

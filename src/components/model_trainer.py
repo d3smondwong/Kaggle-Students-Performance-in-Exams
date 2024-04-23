@@ -91,7 +91,7 @@ class ModelTrainer:
                 
             }
 
-            # calls function evaluate_models() defined in src/utils.py and put the models in a dictionary
+            # calls function evaluate_models() defined in src/utils.py and put the report of the models in a dictionary
             model_report:dict=evaluate_models(X_train_em=X_train,
                                               y_train_em=y_train,
                                               X_test_em=X_test,
@@ -101,16 +101,18 @@ class ModelTrainer:
             ## To get best model score from dict
             best_model_score = max(sorted(model_report.values()))
 
-            ## To get best model name from dict
+            ## To get best model name from dict by index of the best_model_score
             best_model_name = list(model_report.keys())[
                 list(model_report.values()).index(best_model_score)
             ]
             best_model = models[best_model_name]
 
+            # reject if the best model score is <0.6
             if best_model_score<0.6:
                 raise CustomException("No best model found")
             logging.info(f"Best found model on both training and testing dataset")
 
+            # to save the best model object(best_model) into the pickle (.pkl) file via file_path
             save_object(
                 file_path=self.model_trainer_config.trained_model_file_path,
                 obj=best_model
@@ -120,10 +122,6 @@ class ModelTrainer:
 
             r2_square = r2_score(y_test, predicted)
             return r2_square
-            
-
-
-
-            
+                  
         except Exception as e:
             raise CustomException(e,sys)
