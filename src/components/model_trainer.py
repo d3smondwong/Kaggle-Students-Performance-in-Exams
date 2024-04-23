@@ -51,7 +51,7 @@ class ModelTrainer:
                 "CatBoosting Regressor": CatBoostRegressor(verbose=False),
                 "AdaBoost Regressor": AdaBoostRegressor(),
             }
-            
+            """
             # This dictionary holds potential hyperparameter configurations for each model in the models dictionary.
             params={
                 "Decision Tree": {
@@ -90,13 +90,13 @@ class ModelTrainer:
                 }
                 
             }
-
+            """
             # calls function evaluate_models() defined in src/utils.py and put the report of the models in a dictionary
             model_report:dict=evaluate_models(X_train_em=X_train,
                                               y_train_em=y_train,
                                               X_test_em=X_test,
                                               y_test_em=y_test,
-                                              models=models,param=params)
+                                              models=models) #,param=params
             
             ## To get best model score from dict
             best_model_score = max(sorted(model_report.values()))
@@ -121,7 +121,11 @@ class ModelTrainer:
             predicted=best_model.predict(X_test)
 
             r2_square = r2_score(y_test, predicted)
-            return r2_square
+            
+            return (r2_square,
+                    best_model_name,
+                    model_report.values()
+                    )
                   
         except Exception as e:
             raise CustomException(e,sys)

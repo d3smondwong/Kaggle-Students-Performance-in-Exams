@@ -82,34 +82,3 @@ class DataIngestion:
             # Close the database connection (ensure it's closed even if errors occur)
             connection.close()
         """
-"""
-# to initiate and test the data_ingestion.py: python src/components/data_ingestion.py   
-# create 'artifact' folder and the logs     
-if __name__=="__main__":
-    obj=DataIngestion() #Creates an instance of DataIngestion.
-    obj.initiate_data_ingestion() 
-"""     
-
-"""
-# to initiate and test the data_ingestion.py with data_transformation.py: python src/components/data_ingestion.py   
-# create 'artifact' folder and the logs
-# create pickle file     
-if __name__=="__main__":
-    obj=DataIngestion() # Creates an instance of DataIngestion.
-    train_data,test_data=obj.initiate_data_ingestion() # Calls initiate_data_ingestion to get training and testing data paths.
-
-    data_transformation=DataTransformation() # Creates an instance of DataTransformation 
-    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data) # Calls initiate_data_transformation on the data transformation object, passing the training and testing data paths
- """
-
-if __name__=="__main__":
-    obj=DataIngestion() # Creates an instance of DataIngestion.
-    train_data,test_data=obj.initiate_data_ingestion() # Calls initiate_data_ingestion to get training and testing data paths.
-
-    data_transformation=DataTransformation() # Creates an instance of DataTransformation 
-    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data) # Calls initiate_data_transformation on the data transformation object, passing the training and testing data paths
-
-    modeltrainer=ModelTrainer() # Creates an instance of ModelTrainer (likely for training a machine learning model).
-    print(modeltrainer.initiate_model_trainer(train_arr,test_arr)) # Prints the output of initiate_model_trainer, which might be model evaluation metrics or some other training result.
- 
- 
